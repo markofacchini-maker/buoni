@@ -1,0 +1,161 @@
+:root {
+  --ink: #16211f;
+  --muted: #5d6b68;
+  --line: #dde4e2;
+  --surface: #ffffff;
+  --page: #f3f6f5;
+  --accent: #14443f;
+  --accent-ink: #ffffff;
+  --warn-bg: #fff4d6;
+  --warn-ink: #5c4300;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--page);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body { margin: 0; min-height: 100dvh; }
+h2 { margin: 0 0 12px; font-size: 1.15rem; }
+h3 { margin: 20px 0 8px; font-size: 1rem; }
+
+main {
+  max-width: 560px;
+  margin: 0 auto;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+}
+
+.hero {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: calc(24px + env(safe-area-inset-top)) 20px 20px;
+  text-align: center;
+}
+.hero-label, .hero-value { margin: 0; opacity: 0.9; }
+.hero-count { margin: 0; font-size: 4.5rem; font-weight: 700; line-height: 1.05; }
+.hero-value { font-size: 1.15rem; margin-bottom: 18px; }
+.hero .btn-primary { background: var(--accent-ink); color: var(--accent); }
+.hero .btn-primary:disabled { opacity: 0.55; }
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font: inherit;
+  font-weight: 600;
+  min-height: 48px;
+  cursor: pointer;
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.45; cursor: default; }
+.btn-primary { background: var(--accent); border-color: transparent; color: var(--accent-ink); }
+.btn-large { width: 100%; min-height: 60px; font-size: 1.15rem; }
+.btn-block { display: block; width: 100%; margin-top: 8px; }
+.btn-link {
+  appearance: none; border: 0; background: none; color: var(--accent);
+  font: inherit; font-weight: 600; padding: 12px; min-height: 48px; cursor: pointer;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.stats div { padding: 14px 4px; text-align: center; }
+.stats span { display: block; font-size: 1.35rem; font-weight: 700; }
+.stats small { color: var(--muted); font-size: 0.75rem; }
+
+.notice {
+  display: block; width: calc(100% - 32px); margin: 12px 16px 0; padding: 12px 14px;
+  background: var(--warn-bg); color: var(--warn-ink);
+  border: 0; border-radius: 10px; font: inherit; text-align: left;
+}
+.notice-action { cursor: pointer; font-weight: 600; }
+
+.actions {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 16px 4px;
+}
+.actions .btn { padding: 10px 6px; font-size: 0.9rem; }
+
+.tabs { display: flex; gap: 4px; padding: 12px 16px 0; }
+.tab {
+  flex: 1; appearance: none; border: 0; background: none; color: var(--muted);
+  font: inherit; font-weight: 600; padding: 12px; min-height: 48px;
+  border-bottom: 2px solid var(--line); cursor: pointer;
+}
+.tab.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.list { list-style: none; margin: 8px 16px 0; padding: 0; }
+.list li {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.list-code { font-variant-numeric: tabular-nums; font-weight: 600; overflow-wrap: anywhere; }
+.list-meta { display: block; color: var(--muted); font-size: 0.85rem; font-weight: 400; margin-top: 2px; }
+.list-actions { display: flex; gap: 2px; flex-shrink: 0; }
+.list .btn-link { padding: 8px; font-size: 0.9rem; }
+.btn-danger { color: #a3261b; }
+.empty { color: var(--muted); text-align: center; padding: 24px 16px; margin: 0; }
+
+.pay {
+  position: fixed; inset: 0; z-index: 10;
+  display: flex; flex-direction: column;
+  background: #ffffff; color: #000000;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+.pay-top { display: flex; align-items: center; justify-content: space-between; padding: 4px 8px; }
+.pay-session { margin: 0 8px 0 0; font-weight: 600; color: #333333; }
+.pay-body, .pay-finished {
+  flex: 1; min-height: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+}
+#barcode { display: block; }
+.pay-code {
+  margin: 10px 0 0; font-size: 1.3rem; font-weight: 700;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.04em;
+}
+.pay-meta { margin: 6px 0 0; color: #333333; }
+.pay-finished-title { font-size: 1.2rem; font-weight: 600; padding: 0 24px; }
+.pay-actions { padding: 8px 16px 16px; }
+.pay-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+
+/* Telefono in orizzontale: barcode a sinistra, comandi a destra. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .pay {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: "body top" "body actions";
+  }
+  .pay-body, .pay-finished { grid-area: body; }
+  .pay-top { grid-area: top; }
+  .pay-actions { grid-area: actions; align-self: end; padding: 8px 12px 12px 4px; }
+  .pay-code { margin-top: 4px; font-size: 1.1rem; }
+  .pay-meta { margin-top: 2px; font-size: 0.85rem; }
+  .pay-body .btn-link { min-height: 40px; padding: 8px; }
+  .pay-actions .btn-large { min-height: 56px; font-size: 1rem; }
+  .pay-session { font-size: 0.85rem; }
+}
+
+dialog {
+  border: 0; border-radius: 14px; padding: 20px;
+  width: min(92vw, 420px); color: var(--ink); background: var(--surface);
+}
+dialog::backdrop { background: rgba(0, 0, 0, 0.45); }
+dialog p { margin: 0 0 12px; }
+dialog ul { margin: 0 0 12px; padding-left: 20px; }
+dialog ul:empty { display: none; }
+dialog label { display: block; margin-bottom: 12px; font-weight: 600; font-size: 0.9rem; }
+dialog input {
+  display: block; width: 100%; margin-top: 4px; padding: 10px 12px; min-height: 46px;
+  font: inherit; font-weight: 400; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; background: var(--surface);
+}
+form[method="dialog"]:not(.dialog-buttons):not(#form-manual):not(#form-settings) { text-align: right; }
+.dialog-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
